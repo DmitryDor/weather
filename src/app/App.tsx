@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router} from "react-router-dom"
 import {useSelector} from "react-redux";
-import {selectorError, selectorStatus} from "../store/app-reduser/app-selector";
-import {Routes} from "../routes/Routes";
-import {ErrorSnackBar} from "../components/ErrorSnackBar/ErrorSnackBar";
-import Preloader from "../components/Preloder/Preloader";
+import {selectorError, selectorStatus} from "../store/app-reducer/app-selector";
+import {ErrorSnackBar} from "../components/auxiliaryComponents/ErrorSnackBar/ErrorSnackBar";
+import Preloader from "../components/auxiliaryComponents/Preloder/Preloader";
+import {Main} from "../components/Main/Main";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
             <div className="App">
                 {error !== null && <ErrorSnackBar errorMessage={error}/>}
                 {status === 'loading' && <Preloader/>}
-                <Routes/>
+                <Main />
             </div>
         </Router>
     );

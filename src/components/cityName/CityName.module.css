@@ -1,0 +1,9 @@
+.cityName {
+    width: 100%;
+    height: 20%;
+    /*background-color: #61dafb;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

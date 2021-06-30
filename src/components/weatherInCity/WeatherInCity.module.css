@@ -1,0 +1,10 @@
+.weatherMain {
+    height: 80%;
+    /*background-color: yellow;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+h2 {
+    margin: 0;
+}

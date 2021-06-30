@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Preloader.module.css'
-import preloader from '../../assets/images/Infinity-1s-200px.svg'
+import preloader from '../../../assets/images/Infinity-1s-200px.svg'
 
 
 let Preloader = () => {
