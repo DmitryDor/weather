@@ -4,6 +4,7 @@ import preloader from '../../../assets/images/Infinity-1s-200px.svg'
 
 
 let Preloader = () => {
+
     return <div className={style.pre} >
         <img src={preloader}  style={ { height: 200 } }/>
     </div>

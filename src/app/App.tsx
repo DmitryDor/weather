@@ -14,13 +14,12 @@ function App() {
     const error = useSelector(selectorError)
 
 
-    return (<Router>
+    return (
             <div className="App">
                 {error !== null && <ErrorSnackBar errorMessage={error}/>}
                 {status === 'loading' && <Preloader/>}
                 <Main />
             </div>
-        </Router>
     );
 }
 

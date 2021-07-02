@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {setCityAPI} from "../../api/instance";
+import {setAppStatus} from "../app-reducer/app-reducer";
 
 const initialState = {
     sity: 'Your city',
@@ -9,7 +10,8 @@ const initialState = {
             temp: null as number | null,
         },
         weather: [{
-            main: null as string | null
+            main: null as string | null,
+            icon: null as string | null
         }]
     } as DataType
 }
@@ -20,6 +22,7 @@ export  type DataType = {
     },
     weather: Array<{
         main: null | string
+        icon: null | string
     }>
 }
 
@@ -61,6 +64,16 @@ export const mainReducer = (state: MainInitialStateType = initialState, action: 
                     })
                 }
             }
+        case "MAIN/SET_ICON":
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    weather: state.data.weather.map(el => {
+                        return {...el, icon: action.icon}
+                    })
+                }
+            }
 
         default:
             return state
@@ -75,24 +88,26 @@ export const setHumidityAC = (humidity: number) =>
     ({type: 'MAIN/SET_HUMIDITY', humidity} as const)
 export const setMainAC = (main: string) =>
     ({type: 'MAIN/SET_MAIN', main} as const)
-
-
-
+export const setIconAC = (icon: string) =>
+    ({type: 'MAIN/SET_ICON', icon} as const)
 
 
 export const setCityTC = (city: string) => (dispatch: Dispatch) => {
     return setCityAPI.setCity(city).then(res => {
+            dispatch(setAppStatus('loading'))
             dispatch(setCityAC(city))
-            dispatch(setTempAC(Math.round(res.data.main.temp - 272.1 )))
+            dispatch(setTempAC(Math.round(res.data.main.temp - 272.1)))
             dispatch(setHumidityAC(res.data.main.humidity))
             dispatch(setMainAC(res.data.weather[0].main))
+            dispatch(setIconAC(res.data.weather[0].icon))
+            dispatch(setAppStatus('succeeded'))
 
         }
     )
 }
 
-export const setIconTC = (icon: string ) => (dispatch: Dispatch) => {
-    return setCityAPI.setIcon(icon).then( res => {
+export const setIconTC = (icon: string) => (dispatch: Dispatch) => {
+    return setCityAPI.setIcon(icon).then(res => {
         console.log(res)
     })
 }
@@ -105,3 +120,4 @@ type ActionsType =
     | ReturnType<typeof setTempAC>
     | ReturnType<typeof setMainAC>
     | ReturnType<typeof setHumidityAC>
+    | ReturnType<typeof setIconAC>
