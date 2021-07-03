@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './WeatherInCity.module.css'
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
+import {selectorStatus} from "../../store/app-reducer/app-selector";
 
 
 export const WeatherInCity = React.memo(() => {
@@ -14,7 +15,6 @@ export const WeatherInCity = React.memo(() => {
     const icon = useSelector<AppRootStateType, string | null>(state => state.main.data.weather[0].icon)
 
 
-    console.log('WeatherInCity')
     return (
 
         <div className={styles.weatherMain}>

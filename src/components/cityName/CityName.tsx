@@ -1,10 +1,7 @@
-import React, {ChangeEvent, useState, KeyboardEvent, useEffect} from 'react'
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
 import styles from './CityName.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {DataType, setCityAC, setCityTC, setIconTC} from "../../store/main-reducer/main-reducer";
-import {AppRootStateType} from "../../store/store";
-import {setCityAPI} from "../../api/instance";
-import {log} from "util";
+import {setCityTC} from "../../store/main-reducer/main-reducer";
 
 
 export const CityName = () => {
@@ -20,6 +17,7 @@ export const CityName = () => {
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             dispatch(setCityTC(city))
+            setCity('')
         }
     }
 

@@ -5,11 +5,11 @@ import {WeatherInCity} from "../weatherInCity/WeatherInCity";
 
 
 export const Main = () => {
+
     return (
         <div className={styles.main}>
             <CityName />
             <WeatherInCity />
         </div>
     )
-
 }

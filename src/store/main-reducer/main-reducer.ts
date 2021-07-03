@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {setCityAPI} from "../../api/instance";
-import {setAppStatus} from "../app-reducer/app-reducer";
+import {setAppError, setAppStatus} from "../app-reducer/app-reducer";
+
 
 const initialState = {
     sity: 'Your city',
@@ -92,7 +93,7 @@ export const setIconAC = (icon: string) =>
     ({type: 'MAIN/SET_ICON', icon} as const)
 
 
-export const setCityTC = (city: string) => (dispatch: Dispatch) => {
+/*export const setCityTC = (city: string) => (dispatch: Dispatch) => {
     return setCityAPI.setCity(city).then(res => {
             dispatch(setAppStatus('loading'))
             dispatch(setCityAC(city))
@@ -101,10 +102,26 @@ export const setCityTC = (city: string) => (dispatch: Dispatch) => {
             dispatch(setMainAC(res.data.weather[0].main))
             dispatch(setIconAC(res.data.weather[0].icon))
             dispatch(setAppStatus('succeeded'))
-
         }
     )
+}*/
+export const setCityTC = (city: string) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(setAppStatus('loading'))
+        let res = await setCityAPI.setCity(city)
+        dispatch(setCityAC(city))
+        dispatch(setTempAC(Math.round(res.data.main.temp - 272.1)))
+        dispatch(setHumidityAC(res.data.main.humidity))
+        dispatch(setMainAC(res.data.weather[0].main))
+        dispatch(setIconAC(res.data.weather[0].icon))
+        dispatch(setAppStatus('succeeded'))
+    } catch (e) {
+        dispatch(setAppStatus('succeeded'))
+        dispatch(setAppError('City not found'))
+
+    }
 }
+
 
 export const setIconTC = (icon: string) => (dispatch: Dispatch) => {
     return setCityAPI.setIcon(icon).then(res => {
@@ -121,3 +138,4 @@ type ActionsType =
     | ReturnType<typeof setMainAC>
     | ReturnType<typeof setHumidityAC>
     | ReturnType<typeof setIconAC>
+    | ReturnType<typeof setAppStatus>
