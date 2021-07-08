@@ -6,6 +6,8 @@ import {WeatherInCity} from "../weatherInCity/WeatherInCity";
 
 export const Main = () => {
 
+    console.log('Main')
+
     return (
         <div className={styles.main}>
             <CityName />

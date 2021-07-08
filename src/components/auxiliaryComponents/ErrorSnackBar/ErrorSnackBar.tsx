@@ -12,7 +12,6 @@ export const ErrorSnackBar = (props: ErrorSnackBarPropsType) => {
     const dispatch = useDispatch()
 
     const onClickHandler = () => dispatch(setAppError(null))
-
     return (
         <div className={style.notification}>
         <div className={style.text}> {props.errorMessage} </div>

@@ -6,6 +6,8 @@ import {setCityTC} from "../../store/main-reducer/main-reducer";
 
 export const CityName = () => {
 
+    console.log('CityName')
+
     const dispatch = useDispatch()
     const [city, setCity] = useState<string>('')
 

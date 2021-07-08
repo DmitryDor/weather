@@ -1,19 +1,25 @@
 import React from 'react';
 import styles from './WeatherInCity.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../store/store";
-import {selectorStatus} from "../../store/app-reducer/app-selector";
+import {
+    selectorCity,
+    selectorHumidity,
+    selectorIcon,
+    selectorMain,
+    selectorTemp
+} from "../../store/app-reducer/app-selector";
+
 
 
 export const WeatherInCity = React.memo(() => {
 
+    console.log('WeatherInCity')
 
-    const city = useSelector<AppRootStateType, string>(state => state.main.sity)
-    const temp = useSelector<AppRootStateType, number | null>(state => state.main.data.main.temp)
-    const humidity = useSelector<AppRootStateType, number | null>(state => state.main.data.main.humidity)
-    const main = useSelector<AppRootStateType, string | null>(state => state.main.data.weather[0].main)
-    const icon = useSelector<AppRootStateType, string | null>(state => state.main.data.weather[0].icon)
-
+    const city = useSelector(selectorCity)
+    const temp = useSelector(selectorTemp)
+    const humidity = useSelector(selectorHumidity)
+    const main = useSelector(selectorMain)
+    const icon = useSelector(selectorIcon)
 
     return (
 

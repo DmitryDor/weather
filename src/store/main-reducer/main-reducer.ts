@@ -107,28 +107,23 @@ export const setIconAC = (icon: string) =>
 }*/
 export const setCityTC = (city: string) => async (dispatch: Dispatch) => {
     try {
-        dispatch(setAppStatus('loading'))
-        let res = await setCityAPI.setCity(city)
-        dispatch(setCityAC(city))
-        dispatch(setTempAC(Math.round(res.data.main.temp - 272.1)))
-        dispatch(setHumidityAC(res.data.main.humidity))
-        dispatch(setMainAC(res.data.weather[0].main))
-        dispatch(setIconAC(res.data.weather[0].icon))
-        dispatch(setAppStatus('succeeded'))
-    } catch (e) {
-        dispatch(setAppStatus('succeeded'))
-        dispatch(setAppError('City not found'))
+           dispatch(setAppStatus('loading'))
+           let res = await setCityAPI.setCity(city)
+           dispatch(setCityAC(city))
+           dispatch(setTempAC(Math.round(res.data.main.temp - 272.1)))
+           dispatch(setHumidityAC(res.data.main.humidity))
+           dispatch(setMainAC(res.data.weather[0].main))
+           dispatch(setIconAC(res.data.weather[0].icon))
+           dispatch(setAppStatus('succeeded'))
 
+    } catch (e) {
+        if (e.response){
+            dispatch(setAppStatus('succeeded'))
+            dispatch(setAppError(e.response.data.message))
+        }
+        dispatch(setAppStatus('succeeded'))
     }
 }
-
-
-export const setIconTC = (icon: string) => (dispatch: Dispatch) => {
-    return setCityAPI.setIcon(icon).then(res => {
-        console.log(res)
-    })
-}
-
 
 export type MainInitialStateType = typeof initialState
 

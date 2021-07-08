@@ -9,6 +9,8 @@ import {CircularProgress} from "@material-ui/core";
 
 export const App = () => {
 
+    console.log('App')
+
     const status = useSelector(selectorStatus)
     const error = useSelector(selectorError)
 
